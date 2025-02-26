@@ -1,0 +1,33 @@
+---
+title: "Country Analysis"
+format:
+  html:
+    toc: true
+---
+This page analyzes **Life Expectancy, GDP per Capita, and Population** over time for a selected country using the Gapminder dataset.
+
+## Trends Over Time for a Selected Country  
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = pd.read_csv("gapminder.csv")
+
+# Choose a country (Change country name if needed)
+country = "United States"
+subset = df[df["country"] == country]
+
+# Plot Life Expectancy, GDP per Capita, and Population over time
+plt.figure(figsize=(10,6))
+plt.plot(subset["year"], subset["life_expectancy"], label="Life Expectancy", marker="o")
+plt.plot(subset["year"], subset["gdp_per_capita"]/1000, label="GDP per Capita (in 1000s)", marker="s")
+plt.plot(subset["year"], subset["population_millions"]/10, label="Population (divided by 10)", marker="^")
+
+plt.xlabel("Year")
+plt.ylabel("Value")
+plt.legend()
+plt.title(f"Trends in {country} Over Time")
+plt.show()
+```
